@@ -9,5 +9,8 @@
             "email": "eirik@morland.no"
         }
     ],
+    "autoload": {
+      "psr-4": {"violinist\\ProjectData\\": "src"}
+    },
     "require": {}
 }
