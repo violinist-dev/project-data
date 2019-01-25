@@ -1,2 +1,8 @@
 /vendor/
 .idea
+
+# Test output
+/data
+
+# This is a library
+composer.lock
