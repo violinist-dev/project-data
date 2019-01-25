@@ -1,41 +1,44 @@
 <?php
 
-namespace violinist\ProjectData;
+namespace Violinist\ProjectData;
 
-class ProjectData {
+class ProjectData
+{
 
   /**
    * The nid.
    *
    * @var int
    */
-  protected $nid;
+    protected $nid;
 
   /**
    * The php version.
    *
    * @var string
    */
-  protected $phpVersion;
+    protected $phpVersion;
 
   /**
    * @var string
    */
-  protected $customPrMessage;
+    protected $customPrMessage;
 
   /**
    * @return string
    */
-  public function getCustomPrMessage() {
-    return $this->customPrMessage;
-  }
+    public function getCustomPrMessage()
+    {
+        return $this->customPrMessage;
+    }
 
   /**
    * @param string $customPrMessage
    */
-  public function setCustomPrMessage($customPrMessage) {
-    $this->customPrMessage = $customPrMessage;
-  }
+    public function setCustomPrMessage($customPrMessage)
+    {
+        $this->customPrMessage = $customPrMessage;
+    }
 
   /**
    * Get the nid.
@@ -43,9 +46,10 @@ class ProjectData {
    * @return int
    *   Nid.
    */
-  public function getNid() {
-    return $this->nid;
-  }
+    public function getNid()
+    {
+        return $this->nid;
+    }
 
   /**
    * Set the nid.
@@ -53,9 +57,10 @@ class ProjectData {
    * @param int $nid
    *   A nid.
    */
-  public function setNid($nid) {
-    $this->nid = $nid;
-  }
+    public function setNid($nid)
+    {
+        $this->nid = $nid;
+    }
 
   /**
    * Get the php version.
@@ -63,9 +68,10 @@ class ProjectData {
    * @return string
    *   The php version.
    */
-  public function getPhpVersion() {
-    return $this->phpVersion;
-  }
+    public function getPhpVersion()
+    {
+        return $this->phpVersion;
+    }
 
   /**
    * Set the php version.
@@ -73,9 +79,10 @@ class ProjectData {
    * @param string $phpVersion
    *   The php version.
    */
-  public function setPhpVersion($phpVersion) {
-    $this->phpVersion = $phpVersion;
-  }
+    public function setPhpVersion($phpVersion)
+    {
+        $this->phpVersion = $phpVersion;
+    }
 
   /**
    * Create an object from a node.
@@ -86,21 +93,21 @@ class ProjectData {
    * @return \Drupal\cronner\TransferProject
    *   A new project.
    */
-  public static function fromNode($node) {
-    $p = new self();
-    $p->setNid($node->id());
-    $p->setPhpVersion('7.0');
-    if ($node->hasField('field_pull_request_template') && !$node->get('field_pull_request_template')->isEmpty()) {
-      $p->setCustomPrMessage($node->get('field_pull_request_template')->first()->getString());
+    public static function fromNode($node)
+    {
+        $p = new self();
+        $p->setNid($node->id());
+        $p->setPhpVersion('7.0');
+        if ($node->hasField('field_pull_request_template') && !$node->get('field_pull_request_template')->isEmpty()) {
+            $p->setCustomPrMessage($node->get('field_pull_request_template')->first()->getString());
+        }
+        if (!$p->getCustomPrMessage()) {
+          // See if we have a default one on the user.
+            $owner = $node->getOwner();
+            if ($owner->hasField('field_user_pr_template') && !$owner->get('field_user_pr_template')->isEmpty()) {
+                $p->setCustomPrMessage($owner->get('field_user_pr_template')->first()->getString());
+            }
+        }
+        return $p;
     }
-    if (!$p->getCustomPrMessage()) {
-      // See if we have a default one on the user.
-      $owner = $node->getOwner();
-      if ($owner->hasField('field_user_pr_template') && !$owner->get('field_user_pr_template')->isEmpty()) {
-        $p->setCustomPrMessage($owner->get('field_user_pr_template')->first()->getString());
-      }
-    }
-    return $p;
-  }
-
 }
