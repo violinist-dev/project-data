@@ -58,4 +58,14 @@ class UnitTest extends TestCase
         $this->assertEquals('7.0', $data->getPhpVersion());
         $this->assertEquals('eirik test template', $data->getCustomPrMessage());
     }
+
+    public function testFromNodeWithPhpVersion()
+    {
+        $node = new DummyNode();
+        $node->set('nid', 1);
+        $node->set('field_php_version', '7.2');
+        $data = ProjectData::fromNode($node);
+        $this->assertEquals(1, $data->getNid());
+        $this->assertEquals('7.2', $data->getPhpVersion());
+    }
 }

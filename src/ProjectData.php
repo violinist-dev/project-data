@@ -102,11 +102,14 @@ class ProjectData
             $p->setCustomPrMessage($node->get('field_pull_request_template')->first()->getString());
         }
         if (!$p->getCustomPrMessage()) {
-          // See if we have a default one on the user.
+              // See if we have a default one on the user.
             $owner = $node->getOwner();
             if ($owner->hasField('field_user_pr_template') && !$owner->get('field_user_pr_template')->isEmpty()) {
                 $p->setCustomPrMessage($owner->get('field_user_pr_template')->first()->getString());
             }
+        }
+        if ($node->hasField('field_php_version') && !$node->get('field_php_version')->isEmpty()) {
+            $p->setPhpVersion($node->get('field_php_version')->first()->getString());
         }
         return $p;
     }
