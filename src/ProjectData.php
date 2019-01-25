@@ -90,7 +90,7 @@ class ProjectData
    * @param \Drupal\node\NodeInterface $node
    *   A node.
    *
-   * @return \Drupal\cronner\TransferProject
+   * @return \Violinist\ProjectData\ProjectData
    *   A new project.
    */
     public static function fromNode($node)
