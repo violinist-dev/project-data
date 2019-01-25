@@ -19,6 +19,25 @@ class ProjectData {
   protected $phpVersion;
 
   /**
+   * @var string
+   */
+  protected $customPrMessage;
+
+  /**
+   * @return string
+   */
+  public function getCustomPrMessage() {
+    return $this->customPrMessage;
+  }
+
+  /**
+   * @param string $customPrMessage
+   */
+  public function setCustomPrMessage($customPrMessage) {
+    $this->customPrMessage = $customPrMessage;
+  }
+
+  /**
    * Get the nid.
    *
    * @return int
@@ -71,6 +90,16 @@ class ProjectData {
     $p = new self();
     $p->setNid($node->id());
     $p->setPhpVersion('7.0');
+    if ($node->hasField('field_pull_request_template') && !$node->get('field_pull_request_template')->isEmpty()) {
+      $p->setCustomPrMessage($node->get('field_pull_request_template')->first()->getString());
+    }
+    if (!$p->getCustomPrMessage()) {
+      // See if we have a default one on the user.
+      $owner = $node->getOwner();
+      if ($owner->hasField('field_user_pr_template') && !$owner->get('field_user_pr_template')->isEmpty()) {
+        $p->setCustomPrMessage($owner->get('field_user_pr_template')->first()->getString());
+      }
+    }
     return $p;
   }
 
