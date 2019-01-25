@@ -12,13 +12,15 @@ class DummyNode
 
     private $owner;
 
-    public function getOwner() {
+    public function getOwner()
+    {
         // Since a user and a node shares alot of getters and so on, we fake an
         // owner on the class itself.
         return $this;
     }
 
-    public function get($field) {
+    public function get($field)
+    {
         if (!empty($this->{$field})) {
             return $this->{$field};
         }
@@ -35,7 +37,8 @@ class DummyNode
         return $this->nid;
     }
 
-    public function set($field, $value) {
+    public function set($field, $value)
+    {
         if ($field === 'nid') {
             $this->nid = $value;
             return;
