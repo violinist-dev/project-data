@@ -68,4 +68,14 @@ class UnitTest extends TestCase
         $this->assertEquals(1, $data->getNid());
         $this->assertEquals('7.2', $data->getPhpVersion());
     }
+
+    public function testFromNodeWithRoles()
+    {
+        $node = new DummyNode();
+        $node->set('nid', 1);
+        $node->set('roles', ['role1', 'role2']);
+        $data = ProjectData::fromNode($node);
+        $this->assertEquals(1, $data->getNid());
+        $this->assertEquals(['role1', 'role2'], $data->getRoles());
+    }
 }

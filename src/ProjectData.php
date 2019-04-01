@@ -5,115 +5,117 @@ namespace Violinist\ProjectData;
 class ProjectData
 {
 
-  /**
-   * The nid.
-   *
-   * @var int
-   */
+    /**
+     * The nid.
+     *
+     * @var int
+     */
     protected $nid;
 
-  /**
-   * The php version.
-   *
-   * @var string
-   */
+    /**
+     * The php version.
+     *
+     * @var string
+     */
     protected $phpVersion;
 
-  /**
-   * @var string
-   */
+    /**
+     * @var string
+     */
     protected $customPrMessage;
 
-  /**
-   * Roles for the project, inherited from the user.
-   *
-   * @var array
-   */
+    /**
+     * Roles for the project, inherited from the user.
+     *
+     * @var array
+     */
     protected $roles;
 
-  /**
-   * @return array
-   */
-  public function getRoles() {
-    return $this->roles;
-  }
+    /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
 
-  /**
-   * @param array $roles
-   */
-  public function setRoles($roles) {
-    $this->roles = $roles;
-  }
+    /**
+     * @param array $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
 
-  /**
-   * @return string
-   */
+    /**
+     * @return string
+     */
     public function getCustomPrMessage()
     {
         return $this->customPrMessage;
     }
 
-  /**
-   * @param string $customPrMessage
-   */
+    /**
+     * @param string $customPrMessage
+     */
     public function setCustomPrMessage($customPrMessage)
     {
         $this->customPrMessage = $customPrMessage;
     }
 
-  /**
-   * Get the nid.
-   *
-   * @return int
-   *   Nid.
-   */
+    /**
+     * Get the nid.
+     *
+     * @return int
+     *   Nid.
+     */
     public function getNid()
     {
         return $this->nid;
     }
 
-  /**
-   * Set the nid.
-   *
-   * @param int $nid
-   *   A nid.
-   */
+    /**
+     * Set the nid.
+     *
+     * @param int $nid
+     *   A nid.
+     */
     public function setNid($nid)
     {
         $this->nid = $nid;
     }
 
-  /**
-   * Get the php version.
-   *
-   * @return string
-   *   The php version.
-   */
+    /**
+     * Get the php version.
+     *
+     * @return string
+     *   The php version.
+     */
     public function getPhpVersion()
     {
         return $this->phpVersion;
     }
 
-  /**
-   * Set the php version.
-   *
-   * @param string $phpVersion
-   *   The php version.
-   */
+    /**
+     * Set the php version.
+     *
+     * @param string $phpVersion
+     *   The php version.
+     */
     public function setPhpVersion($phpVersion)
     {
         $this->phpVersion = $phpVersion;
     }
 
-  /**
-   * Create an object from a node.
-   *
-   * @param \Drupal\node\NodeInterface $node
-   *   A node.
-   *
-   * @return \Violinist\ProjectData\ProjectData
-   *   A new project.
-   */
+    /**
+     * Create an object from a node.
+     *
+     * @param \Drupal\node\NodeInterface $node
+     *   A node.
+     *
+     * @return \Violinist\ProjectData\ProjectData
+     *   A new project.
+     */
     public static function fromNode($node)
     {
         $p = new self();
@@ -123,7 +125,7 @@ class ProjectData
             $p->setCustomPrMessage($node->get('field_pull_request_template')->first()->getString());
         }
         if (!$p->getCustomPrMessage()) {
-              // See if we have a default one on the user.
+            // See if we have a default one on the user.
             $owner = $node->getOwner();
             if ($owner->hasField('field_user_pr_template') && !$owner->get('field_user_pr_template')->isEmpty()) {
                 $p->setCustomPrMessage($owner->get('field_user_pr_template')->first()->getString());
@@ -134,7 +136,7 @@ class ProjectData
         }
         $owner = $node->getOwner();
         if ($owner) {
-          $p->setRoles($owner->getRoles());
+            $p->setRoles($owner->getRoles());
         }
         return $p;
     }
