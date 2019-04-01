@@ -25,6 +25,27 @@ class ProjectData
     protected $customPrMessage;
 
   /**
+   * Roles for the project, inherited from the user.
+   *
+   * @var array
+   */
+    protected $roles;
+
+  /**
+   * @return array
+   */
+  public function getRoles() {
+    return $this->roles;
+  }
+
+  /**
+   * @param array $roles
+   */
+  public function setRoles($roles) {
+    $this->roles = $roles;
+  }
+
+  /**
    * @return string
    */
     public function getCustomPrMessage()
@@ -110,6 +131,10 @@ class ProjectData
         }
         if ($node->hasField('field_php_version') && !$node->get('field_php_version')->isEmpty()) {
             $p->setPhpVersion($node->get('field_php_version')->first()->getString());
+        }
+        $owner = $node->getOwner();
+        if ($owner) {
+          $p->setRoles($owner->getRoles());
         }
         return $p;
     }
