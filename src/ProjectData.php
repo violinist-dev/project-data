@@ -32,6 +32,13 @@ class ProjectData
     protected $roles;
 
     /**
+     * Should we update all?
+     *
+     * @var bool
+     */
+    protected $updateAll;
+
+    /**
      * @return array
      */
     public function getRoles()
@@ -72,6 +79,11 @@ class ProjectData
     public function getNid()
     {
         return $this->nid;
+    }
+
+    public function shouldUpdateAll()
+    {
+        return $this->updateAll;
     }
 
     /**
