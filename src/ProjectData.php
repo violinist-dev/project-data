@@ -120,6 +120,14 @@ class ProjectData
     }
 
     /**
+     * Set the update all flag.
+     */
+    public function setUpdateAll($update)
+    {
+      $this->updateAll = (bool) $update;
+    }
+
+    /**
      * Create an object from a node.
      *
      * @param \Drupal\node\NodeInterface $node
