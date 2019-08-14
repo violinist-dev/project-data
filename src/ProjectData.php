@@ -124,7 +124,7 @@ class ProjectData
      */
     public function setUpdateAll($update)
     {
-      $this->updateAll = (bool) $update;
+        $this->updateAll = (bool) $update;
     }
 
     /**
