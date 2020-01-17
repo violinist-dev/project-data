@@ -39,6 +39,29 @@ class ProjectData
     protected $updateAll;
 
     /**
+     * Either a path to a directory (without the last slash) or null (means root).
+     *
+     * @var string|null
+     */
+    protected $composerJsonDir;
+
+    /**
+     * @return string|null
+     */
+    public function getComposerJsonDir()
+    {
+        return $this->composerJsonDir;
+    }
+
+    /**
+     * @param string|null $composerJsonDir
+     */
+    public function setComposerJsonDir($composerJsonDir)
+    {
+        $this->composerJsonDir = $composerJsonDir;
+    }
+
+    /**
      * @return array
      */
     public function getRoles()
