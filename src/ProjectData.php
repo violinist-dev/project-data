@@ -177,6 +177,10 @@ class ProjectData
         if ($node->hasField('field_php_version') && !$node->get('field_php_version')->isEmpty()) {
             $p->setPhpVersion($node->get('field_php_version')->first()->getString());
         }
+        if ($node->hasField('field_composer_json_path') && !$node->get('field_composer_json_path')->isEmpty()) {
+            $directory = $node->get('field_composer_json_path')->first()->getString();
+            $p->setComposerJsonDir($directory);
+        }
         $owner = $node->getOwner();
         if ($owner) {
             $p->setRoles($owner->getRoles());
