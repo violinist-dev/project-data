@@ -46,6 +46,29 @@ class ProjectData
     protected $composerJsonDir;
 
     /**
+     * ENV string.
+     *
+     * @var string
+     */
+    protected $envString;
+
+    /**
+     * @return string
+     */
+    public function getEnvString()
+    {
+        return $this->envString;
+    }
+
+    /**
+     * @param string $envString
+     */
+    public function setEnvString($envString)
+    {
+        $this->envString = $envString;
+    }
+
+    /**
      * @return string|null
      */
     public function getComposerJsonDir()
@@ -184,6 +207,18 @@ class ProjectData
         $owner = $node->getOwner();
         if ($owner) {
             $p->setRoles($owner->getRoles());
+        }
+        $p->setEnvString('');
+        if ($node->hasField('field_environment_variables') && !$node->get('field_environment_variables')->isEmpty()) {
+            $p->setEnvString($node->get('field_environment_variables')->first()->getString());
+        }
+        if (!$p->getEnvString()) {
+            // Use the user one. If available.
+            if ($owner) {
+                if ($owner->hasField('field_environment_variables') && !$owner->get('field_environment_variables')->isEmpty()) {
+                    $p->setEnvString($owner->get('field_environment_variables')->first()->getString());
+                }
+            }
         }
         return $p;
     }
