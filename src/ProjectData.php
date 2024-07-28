@@ -2,7 +2,6 @@
 
 namespace Violinist\ProjectData;
 
-use eiriksm\CosyComposer\Message;
 use Symfony\Component\Dotenv\Dotenv;
 
 class ProjectData
