@@ -78,4 +78,12 @@ class UnitTest extends TestCase
         $this->assertEquals(1, $data->getNid());
         $this->assertEquals(['role1', 'role2'], $data->getRoles());
     }
+
+    public function testFromNodeWithEnv()
+    {
+        $node = new DummyNode();
+        $node->set('field_environment_variables', 'FOO=bar');
+        $data = ProjectData::fromNode($node);
+        self::assertEquals(['FOO' => 'bar'], $data->getEnvArray());
+    }
 }
