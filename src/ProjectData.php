@@ -63,14 +63,13 @@ class ProjectData
         return $this->envString;
     }
 
-    public function getEnvArray() : array 
+    public function getEnvArray() : array
     {
         $env = $this->getEnvString();
         $dotenv_data = new Dotenv();
         try {
             return $dotenv_data->parse($env);
-        }
-        catch (\Throwable $e) {
+        } catch (\Throwable $e) {
             return [];
         }
     }
