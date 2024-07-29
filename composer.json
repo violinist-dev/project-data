@@ -40,9 +40,7 @@
         "php-coveralls/php-coveralls": "^2.0",
         "phpstan/phpstan-phpunit": "^1.4",
         "phpstan/extension-installer": "^1.4",
-        "drupal/violinist_projects": "1.x-dev",
-        "drupal/deploy_key": "dev-1.x",
-        "drupal/vcs_provider_client": "2.0.x-dev"
+        "drupal/violinist_projects": "1.x-dev"
     },
     "config": {
         "allow-plugins": {
