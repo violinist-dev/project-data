@@ -44,6 +44,9 @@ jobs:
       - name: Install dependencies
         run: composer --verbose install
 
+      - name: phpstan
+        run: composer phpstan
+
       - name: Run tests
         run: composer test
         env:
