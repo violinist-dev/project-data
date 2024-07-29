@@ -14,6 +14,16 @@ class DummyNode
 
     private $roles;
 
+    public function getTeam() : self
+    {
+        return $this;
+    }
+
+    public function getEnvironmentVariables()
+    {
+        return [];
+    }
+
     public function getOwner()
     {
         // Since a user and a node shares alot of getters and so on, we fake an
