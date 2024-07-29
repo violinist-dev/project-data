@@ -2,6 +2,8 @@
 
 namespace Violinist\ProjectData;
 
+use Drupal\violinist_projects\ProjectNode;
+use Drupal\violinist_teams\TeamNode;
 use Symfony\Component\Dotenv\Dotenv;
 
 class ProjectData
@@ -189,8 +191,8 @@ class ProjectData
     /**
      * Create an object from a node.
      *
-     * @param \Drupal\node\NodeInterface $node
-     *   A node.
+     * @param \Drupal\violinist_projects\ProjectNode $node
+     *   A project node.
      *
      * @return \Violinist\ProjectData\ProjectData
      *   A new project.
@@ -226,6 +228,19 @@ class ProjectData
             $p->setEnvString($node->get('field_environment_variables')->first()->getString());
         }
         if (!$p->getEnvString()) {
+            // The team one should really take precedence at this point. In fact,
+            // we will remove the user one altogether at some point, but double
+            // here is not the worst either.
+            $team = $node->getTeam();
+            if ($team instanceof TeamNode) {
+                $new_env_string = '';
+                foreach ($team->getEnvironmentVariables() as $key => $value) {
+                    $new_env_string .= $key . '=' . $value . "\n";
+                }
+                if ($new_env_string) {
+                    $p->setEnvString($new_env_string);
+                }
+            }
             // Use the user one. If available.
             if ($owner) {
                 if ($owner->hasField('field_environment_variables') && !$owner->get('field_environment_variables')->isEmpty()) {
