@@ -1,0 +1,9 @@
+parameters:
+    level: 2
+    scanDirectories:
+      - src
+      - tests
+      - vendor/drupal/violinist_projects/src
+      - vendor/drupal/violinist_teams/src
+      - vendor/drupal/core/modules/node/src/Entity
+      - vendor/drupal/core/modules/user/src
