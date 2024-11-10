@@ -3,6 +3,7 @@
 [![Test](https://github.com/violinist-dev/project-data/actions/workflows/test.yml/badge.svg)](https://github.com/violinist-dev/project-data/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/violinist-dev/project-data/badge.svg?branch=master)](https://coveralls.io/github/violinist-dev/project-data?branch=master)
 [![Violinist enabled](https://img.shields.io/badge/violinist-enabled-brightgreen.svg)](https://violinist.io)
+[![Packagist Downloads](https://img.shields.io/packagist/dt/violinist-dev/project-data)](https://packagist.org/packages/violinist-dev/project-data)
 
 Project data value object.
 
