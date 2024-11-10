@@ -208,8 +208,8 @@ class ProjectData
         if (!$p->getCustomPrMessage()) {
             // See if we have a default one on the team.
             $team = $node->getTeam();
-            if ($team instanceof TeamNode && $team->getPullRequestInstructions()) {
-                $p->setCustomPrMessage($team->getPullRequestInstructions());
+            if ($team->hasField('field_pull_request_template') && !$team->get('field_pull_request_template')->isEmpty()) {
+                $p->setCustomPrMessage($team->get('field_pull_request_template')->first()->getString());
             }
         }
         if ($node->hasField('field_php_version') && !$node->get('field_php_version')->isEmpty()) {

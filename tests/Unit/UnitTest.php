@@ -36,23 +36,27 @@ class UnitTest extends TestCase
         $this->assertEquals('eirik test template', $data->getCustomPrMessage());
     }
 
-    public function testFromNodeWithCustomPrMessageInOwner()
+    public function testFromNodeWithCustomPrMessageInTeam()
     {
         $node = new DummyNode();
         $node->set('nid', 1);
-        $node->set('field_user_pr_template', 'eirik test template user');
+        $team_node = new DummyNode();
+        $team_node->set('field_pull_request_template', 'eirik test template team');
+        $node->set('team', $team_node);
         $data = ProjectData::fromNode($node);
         $this->assertEquals(1, $data->getNid());
         $this->assertEquals('7.0', $data->getPhpVersion());
-        $this->assertEquals('eirik test template user', $data->getCustomPrMessage());
+        $this->assertEquals('eirik test template team', $data->getCustomPrMessage());
     }
 
-    public function testFromNodeWithOverriddenAndOwner()
+    public function testFromNodeWithOverriddenAndTeam()
     {
         $node = new DummyNode();
         $node->set('nid', 1);
         $node->set('field_pull_request_template', 'eirik test template');
-        $node->set('field_user_pr_template', 'eirik test template user');
+        $team_node = new DummyNode();
+        $team_node->set('field_pull_request_template', 'eirik test template team');
+        $node->set('team', $team_node);
         $data = ProjectData::fromNode($node);
         $this->assertEquals(1, $data->getNid());
         $this->assertEquals('7.0', $data->getPhpVersion());
