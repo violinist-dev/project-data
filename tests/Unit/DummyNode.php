@@ -12,10 +12,15 @@ class DummyNode
 
     private $owner;
 
+    private $team;
+
     private $roles;
 
     public function getTeam() : self
     {
+        if ($this->team) {
+            return $this->team;
+        }
         return $this;
     }
 
@@ -56,6 +61,10 @@ class DummyNode
 
     public function set($field, $value)
     {
+        if ($field === 'team') {
+            $this->team = $value;
+            return;
+        }
         if ($field === 'nid') {
             $this->nid = $value;
             return;
