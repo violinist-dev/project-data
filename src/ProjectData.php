@@ -241,12 +241,6 @@ class ProjectData
                     $p->setEnvString($new_env_string);
                 }
             }
-            // Use the user one. If available.
-            if ($owner) {
-                if ($owner->hasField('field_environment_variables') && !$owner->get('field_environment_variables')->isEmpty()) {
-                    $p->setEnvString($owner->get('field_environment_variables')->first()->getString());
-                }
-            }
         }
         return $p;
     }
