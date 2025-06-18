@@ -228,9 +228,6 @@ class ProjectData
             $p->setEnvString($node->get('field_environment_variables')->first()->getString());
         }
         if (!$p->getEnvString()) {
-            // The team one should really take precedence at this point. In fact,
-            // we will remove the user one altogether at some point, but double
-            // here is not the worst either.
             $team = $node->getTeam();
             if ($team instanceof TeamNode) {
                 $new_env_string = '';
